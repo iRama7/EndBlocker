@@ -4,3 +4,6 @@ main: rama.endblock.EndBlock
 api-version: 1.17
 authors: [ Rama ]
 description: Bloquea el mundo del End por permisos u horarios.
+commands:
+  endblock:
+depend: [Multiverse-Core]

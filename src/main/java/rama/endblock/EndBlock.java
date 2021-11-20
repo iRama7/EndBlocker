@@ -1,17 +1,52 @@
 package rama.endblock;
 
+import org.bukkit.Bukkit;
+import org.bukkit.ChatColor;
+import org.bukkit.plugin.Plugin;
+import org.bukkit.plugin.PluginManager;
 import org.bukkit.plugin.java.JavaPlugin;
+import rama.endblock.worldblock.Command;
+import rama.endblock.worldblock.WorldBlockMain;
+
+import java.io.File;
 
 public final class EndBlock extends JavaPlugin {
 
+    public String rutaConfig;
+
     @Override
     public void onEnable() {
-        // Plugin startup logic
-
+        registerEvents();
+        registerCommands();
+        log();
+        registerConfig();
+        WorldBlockMain.setEndStatus(this);
     }
 
     @Override
     public void onDisable() {
-        // Plugin shutdown logic
+
+    }
+
+    public void registerEvents(){
+        PluginManager pm = getServer().getPluginManager();
+        pm.registerEvents(new worldSwitchEvent(),this);
+    }
+    public void registerCommands(){
+        this.getCommand("endblock").setExecutor(new Command(this));
+    }
+    public void log(){
+        String prefix = ChatColor.translateAlternateColorCodes('&', "&3[&cEndBlock&3] &r");
+        String msg1 = ChatColor.translateAlternateColorCodes('&', "&eCargando EndBlock por ImRama...");
+        Bukkit.getConsoleSender().sendMessage(prefix+msg1);
+    }
+    public void registerConfig(){
+        File config = new File(this.getDataFolder(),"config.yml");
+        rutaConfig = config.getPath();
+        if(!config.exists()){
+            this.getConfig().options().copyDefaults(true);
+            saveDefaultConfig();
+        }
+        Bukkit.getConsoleSender().sendMessage(ChatColor.translateAlternateColorCodes('&', "&3[&cEndBlock&3] &eCargando config.yml..."));
     }
 }
