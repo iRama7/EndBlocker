@@ -30,6 +30,8 @@ public class WorldBlockMain {
         FileConfiguration config = pl.getConfig();
 
         Bukkit.getServer().dispatchCommand(pl.getServer().getConsoleSender(), "mv load world_the_end");
+        Bukkit.getServer().dispatchCommand(pl.getServer().getConsoleSender(), "hd reload");
+        Bukkit.getServer().dispatchCommand(pl.getServer().getConsoleSender(), "jumppad reload");
         Bukkit.getConsoleSender().sendMessage(ChatColor.translateAlternateColorCodes('&', "&c&lAVISO&e Se ha cargado el mundo del end."));
         config.set("load_unload-check", false);
         pl.saveConfig();
