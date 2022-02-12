@@ -2,10 +2,8 @@ package rama.endblock;
 
 import org.bukkit.Bukkit;
 import org.bukkit.ChatColor;
-import org.bukkit.plugin.Plugin;
 import org.bukkit.plugin.PluginManager;
 import org.bukkit.plugin.java.JavaPlugin;
-import rama.endblock.worldblock.Command;
 import rama.endblock.worldblock.WorldBlockMain;
 
 import java.io.File;
@@ -17,23 +15,21 @@ public final class EndBlock extends JavaPlugin {
     @Override
     public void onEnable() {
         registerEvents();
-        registerCommands();
         log();
         registerConfig();
         WorldBlockMain.setEndStatus(this);
+
+        new PAPIExpansion(this).register();
     }
 
     @Override
     public void onDisable() {
-
     }
 
     public void registerEvents(){
         PluginManager pm = getServer().getPluginManager();
         pm.registerEvents(new worldSwitchEvent(),this);
-    }
-    public void registerCommands(){
-        this.getCommand("endblock").setExecutor(new Command(this));
+        pm.registerEvents(new CalendarEvent(this), this);
     }
     public void log(){
         String prefix = ChatColor.translateAlternateColorCodes('&', "&3[&cEndBlock&3] &r");
