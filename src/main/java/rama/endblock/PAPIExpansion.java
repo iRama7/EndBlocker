@@ -1,5 +1,6 @@
 package rama.endblock;
 
+import me.clip.placeholderapi.PlaceholderAPI;
 import me.clip.placeholderapi.expansion.PlaceholderExpansion;
 import org.bukkit.Bukkit;
 import org.bukkit.OfflinePlayer;
@@ -48,6 +49,13 @@ public class PAPIExpansion extends PlaceholderExpansion {
     public @Nullable String onPlaceholderRequest(Player player, String params) {
         if(params.equals("timer")){
             return timer;
+        }else if(params.equals("timer_dragon")){
+            String dragonslayer_timer = PlaceholderAPI.setPlaceholders(player, "%dragonslayer_nexttimehms%");
+            if(dragonslayer_timer.equalsIgnoreCase("not yet")){
+                return "&5&lGRIFFIN &7está vivo!";
+            }else{
+                return dragonslayer_timer;
+            }
         }
         return null;
     }
