@@ -1,6 +1,7 @@
 package rama.endblock;
 
 import org.bukkit.Bukkit;
+import org.bukkit.World;
 import org.bukkit.event.EventHandler;
 import org.bukkit.event.Listener;
 import org.bukkit.event.player.AsyncPlayerChatEvent;
@@ -59,6 +60,14 @@ public class CalendarEvent implements Listener {
                 int minutos_restantes = minutos_apertura - minutos_actuales;
                 int segundos_restantes = segundos_apertura - segundos_actuales;
 
+
+                if(!plugin.getConfig().getBoolean("load_unload-check") && dia_actual == 1 && hora_actual == 23 && minutos_actuales == 59 && segundos_actuales == 59){
+                    if(bandera == 0){
+                        WorldBlockMain.unloadEnd(plugin);
+                        bandera = 1;
+                    }
+                }
+
                 if(dia_actual == 7) {
                     timer = "&aABIERTO&7";
 
@@ -84,12 +93,6 @@ public class CalendarEvent implements Listener {
         scheduler.runTaskTimerAsynchronously(plugin, () -> {
             bandera = 0;
         }, 20L, 20l);
-
-
-
-
-
-
     }
 
 
