@@ -3,7 +3,7 @@ version: '${project.version}'
 main: rama.endblock.EndBlock
 api-version: 1.17
 authors: [ Rama ]
-description: Bloquea el mundo del End por permisos u horarios.
+description: Bloquea el mundo del End.
 load: POSTWORLD
 commands:
   endblock:

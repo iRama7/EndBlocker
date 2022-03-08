@@ -18,6 +18,7 @@ public class PAPIExpansion extends PlaceholderExpansion {
     }
 
     public static String timer;
+    public static String timer_cierre;
 
     @Override
     public @NotNull String getIdentifier() {
@@ -56,6 +57,8 @@ public class PAPIExpansion extends PlaceholderExpansion {
             }else{
                 return dragonslayer_timer;
             }
+        }else if(params.equals("timer_cierre")){
+            return timer_cierre;
         }
         return null;
     }
